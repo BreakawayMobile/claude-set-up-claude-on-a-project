@@ -11,3 +11,9 @@ I left out anything Claude can quickly learn from the code, such as which test l
 In `.claude/settings.json`, I allow `npm test` so tests run without a prompt, and I require confirmation for `git push`. I deny reading `.env` with the Read tool, and I deny force-pushes using `--force` or `-f`.
 
 Without the deny rules, Claude could read secrets from `.env` into the conversation, or a force-push could overwrite commits on the remote and destroy other people's work. These rules reduce the risk but don't remove it. A shell command like `cat .env` isn't covered by the Read rule, so real secrets should still be kept out of the project folder.
+
+## Verification
+
+`/memory` listed `./CLAUDE.md` under project instructions, which confirmed that Claude Code loaded this project's `CLAUDE.md`.
+
+The Allow tab in `/permissions` showed `Bash(npm test)` and `Bash(npm test *)`, and the Ask tab showed `Bash(git push *)`. The Deny tab showed `Read(./.env)`, `Bash(git push *--force*)`, `Bash(git push -f*)`, and `Bash(git push * -f*)`, which confirmed that all of the project's rules were loaded.
